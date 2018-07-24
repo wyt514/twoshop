@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0048)http://localhost:8080/mango/product/list/1.jhtml -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<style>
+</style>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>2号店</title>
+    <link href="HOME_STATIC/css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="HOME_STATIC/css/product.css" rel="stylesheet" type="text/css"/>
+    <style>
+        div.container {
+            width: 950px;
+            margin: 0px auto;
+            *zoom: 1;
+        }
+        .header{
+            height:98px;
+        }
+        div.header .topNav li a {
+            margin: 4px;
+        }
+        div.container .span10 {
+            width: 390px;
+        }
+        body {
+            padding: 0px;
+        }
+        .sort {
+            width: 374px;
+            border: 1px solid #3333335e;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .sort a {
+            display: inline-block;
+            width: 26.3%;
+            border-right: 1px solid #3333335e;
+            padding: 4px 10px;
+            text-align: center;
+            color: #333;
+        }
+        .sort i {
+            display: inline-block;
+            width: 27px;
+            height: 28px;
+            background: url('img/sorrow1.png') 8px 12px no-repeat;
+        }
+        .sort a.price {
+            border-right-style: none;
+        }
+        .sort .price i {
+            background: url('img/price.png') 8px 12px no-repeat;
+        }
+    </style>
+</head>
+<body background="HOME_STATIC/image/year11.jpg"  >
+<!-- 头部 -->
+<div class="container header" style="width:950px;margin:0px auto;" >
+    <div class="span5">
+        <div class="logo">
+                <a href="{:url('home/index/index')}"><img src="HOME_STATIC/image/dianpulogo.png" width="190px" height="46px"; alt="二号店"/>
+            </a>
+        </div>
+    </div>
+
+    <!-- 搜索框	 -->
+    {include file="public/search" /}
+
+
+
+</div>
+</div>
+
+
+</div>
+
+<!-- 正文 -->
+<div class="container productList" style="background-color:#fff;width: 950px;margin: 0px auto;*zoom: 1;">
+    <!-- 导航 -->
+    <div class="span6">
+        <div class="hotProductCategory">
+            <dl>
+                <dt>
+                    <a href="#" style="color:rgb(237, 140, 53);font-size:18px;"></a>
+                </dt>
+                <dd>
+                    <a href="#" style="color:#75716c;font-size:13px;"></a>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- 商品展示 -->
+    <div class="span18 last">
+        <form id="productForm" action="" method="get">
+
+            <!-- 新增代码 升降序 -->
+      <!--      <div class="sort" id="sort">
+                <a >综合<i></i></a>
+                <a onclick="saleSort()">销量<i></i></a>
+                <a onclick="priceSort()" class="price">价格<i></i></a>
+            </div>-->
+            <input type="hidden" id="brandId" name="brandId" value="">
+            <input type="hidden" id="promotionId" name="promotionId" value="">
+            <input type="hidden" id="orderType" name="orderType" value="">
+            <input type="hidden" id="pageNumber" name="pageNumber" value="1">
+            <input type="hidden" id="pageSize" name="pageSize" value="20">
+
+            <div id="result" class="result table clearfix">
+                <ul>
+{volist name="rs" id="vo"}
+                    <li>
+                        <a href="{:url('home/product/specificproduct',['goodsid'=>$vo.goodsid])}" target=" ">
+                            <img src="{$vo.goodsimg}" width="170" height="170"  style="display: inline-block;">
+
+                            <span class="price" id="price" style="margin-left:10px;color: #ed8c35;">
+						商城价： <i></i> ￥{$vo.shopprice}元
+					</span>
+
+                        </a>
+                    </li>
+                    {/volist}
+
+
+
+                </ul>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- 尾部 -->
+<div class="container footer" style="width:950px;margin:0px auto;">
+    <div class="span24">
+        <div class="footerAd">
+            <img src="HOME_STATIC/image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势">
+        </div>
+    </div>
+    <div class="span24">
+        <ul class="bottomNav">
+            <li>
+                <a >关于我们</a>
+                |
+            </li>
+            <li>
+                <a>联系我们</a>
+                |
+            </li>
+            <li>
+                <a >诚聘英才</a>
+                |
+            </li>
+            <li>
+                <a >法律声明</a>
+                |
+            </li>
+            <li>
+                <a>友情链接</a>
+                |
+            </li>
+            <li>
+                <a target="_blank">支付方式</a>
+                |
+            </li>
+            <li>
+                <a  target="_blank">配送方式</a>
+                |
+            </li>
+            <li>
+                <a >官网</a>
+                |
+            </li>
+            <li>
+                <a >论坛</a>
+
+            </li>
+        </ul>
+    </div>
+    <div class="span24">
+        <div class="copyright">Copyright©2005-2015 网上商城 版权所有</div>
+    </div>
+</div>
+<script type="text/javascript">
+    // 从小到大排序
+    function sortNumSL(a, b) {
+        return b - a;
+    }
+    // 从大到小排序
+    function sortNumLS(a, b) {
+        return a - b;
+    }
+    var sl = 1;
+    function priceSort() {
+        var sort = document.querySelector('#sort');
+        var priceLink = sort.children[2];
+        var icon = priceLink.children[0];
+        console.log(icon);
+        var priceList = [];
+        var priceSort = document.querySelector('#result');
+        var ul = priceSort.children[0];
+        var lists = ul.children;
+        var len = lists.length;
+        priceLink.style.color = '#ed8c35';
+        for(var i = 0; i < len; i++) {
+            var li = lists[i];
+            li.index = i;
+            var link = li.children[0];
+            var price = link.querySelector('#price').children[0].innerText;
+            // console.log(typeof price);
+            priceList.push(price);
+        }
+        if(sl === 1) {
+            icon.style.background = "url('img/priceSL.png') 8px 12px no-repeat";
+            priceList.sort(sortNumSL);
+            for (i = 0; i < len; i++) {
+                console.log(priceList[i]);
+                for (var j = 0; j < len; j++) {
+                    var li = lists[j];
+                    var link = li.children[0];
+                    var price = link.querySelector('#price').children[0].innerText;
+                    if(price === priceList[i]) {
+                        ul.insertBefore(li,ul.childNodes[0]);
+                        break;
+                    }
+                }
+            }
+            console.log(lists);
+            sl = 0;
+        }else if(sl === 0) {
+            icon.style.background = "url('img/priceLS.png') 8px 12px no-repeat";
+            priceList.sort(sortNumLS);
+            var max = priceList[0];
+            for (i = 0; i < len; i++) {
+                console.log(priceList[i]);
+                for (var j = 0; j < len; j++) {
+                    var li = lists[j];
+                    var link = li.children[0];
+                    var price = link.querySelector('#price').children[0].innerText;
+                    if(price === priceList[i]) {
+                        ul.insertBefore(li,ul.childNodes[0]);
+                        break;
+                    }
+                }
+            }
+            console.log(lists);
+            sl = 1;
+        }
+    }
+</script>
+</body>
+</html>

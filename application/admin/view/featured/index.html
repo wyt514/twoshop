@@ -1,0 +1,52 @@
+<!--包含头部文件-->
+{include file="public/header" /}
+<body>
+<nav class="breadcrumb"></nav>
+<div class="page-container">
+
+
+  <form action="{:url('featured/changeorder')}" method="post">
+    <table class="table table-border table-bordered table-bg table-hover table-sort">
+      <thead>
+        <tr class="text-c">
+          <th width="40">ID</th>
+          <th width="80">所属分类</th>
+          <th width="100">商品名</th>
+          <th width="80">排序</th>
+
+          <th width="30">创建时间</th>
+          <th width="30">修改状态</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {volist name="data" id="vo" key="k"}
+        <tr class="text-c">
+          <td><input type="hidden"  name="featuredid[{$k}]" value="{$vo.id}">{$vo.id}</td>
+          <td><a href="" target="_blank">{$vo.catid}</a></td>
+          <td class="text-c">{$vo.title}</td>
+          <td><input style="border: none;border-radius: 3px;background: #ccc;width: 54px;height: 25px;text-align: center" type="text" value="{$vo.listorder}" id="listor" name="list[{$k}]"></td>
+
+          <td>{$vo.create_time}</td>
+          <td class="td-status"><a href="#" onClick="changefeatured('{:url(\'featured/changestatus\')}','{$vo.id}')" title="点击修改状态">{$vo.status|status}</a></td>
+        </tr>
+        {/volist}
+
+      </tbody>
+
+    </table>
+    <!--<input type="button" name="listO" id="listO" value="排序">-->
+  <input type="submit"style="border-radius: 5px;  border: 1px solid #ccc;width: 100px;height: 28px;color: white;text-align:center;font-weight:bold;background:#ccc;cursor:pointer;margin: 16px 43%" name="listname" id="list" value="排序">
+<div class="renderdiv" style="margin: 2% 50%;display: inline">
+    {$data->render()}
+</div>
+  </form>
+</div>
+<script>
+
+
+</script>
+<!--包含头部文件-->
+{include file="public/footer" /}

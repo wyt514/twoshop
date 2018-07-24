@@ -1,0 +1,58 @@
+<!--包含头部文件-->
+{include file="public/header" /}
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员管理 <span class="c-gray en">&gt;</span> 会员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-bg table-hover table-sort">
+			<thead>
+				<tr class="text-c">
+					<th width="40"><input name="" type="checkbox" value=""></th>
+					<th width="50">ID</th>
+					<th width="100">用户名</th>
+					<th width="30">用户性别</th>
+					<th width="150">用户手机</th>
+					<th width="150">用户邮箱</th>
+					<th width="80">最后登录时间</th>
+					<th width="60">最后登录IP</th>
+					<th width="60">状态</th>
+					<th width="60">用户积分</th>
+					<th width="60">历史消费积分</th>
+					<th width="80">会员等级</th>
+					<th width="60">余额</th>
+					<th width="100">创建时间</th>
+					<th width="80">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{volist name="data" id="vo"}
+				<tr class="text-c">
+					<td><input name="" type="checkbox" value=""></td>
+					<td>{$vo.userid}</td>
+					<td>{$vo.username}</td>
+					<td>{$vo.sex|sex}</td>
+					<td>{$vo.phone}</td>
+					<td>{$vo.email}</td>
+					<td>{$vo.last_login_time}</td>
+					<td>{$vo.last_login_ip}</td>
+					<td>{$vo.flag|flag}</td>
+					<td>{$vo.score}</td>
+					<td>{$vo.totalscore}</td>
+					<td>{$vo.rank|viprank}</td>
+					<td>{$vo.money}</td>
+					<td>{$vo.create_time}</td>
+					<td class="td-manage"><div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a onclick="o2o_s_edit('查看详情','{:url(\'user/editflag\',[\'userid\'=>$vo.userid,\'flag\'=>$vo.flag])}','',300)" href="javascript:;">
+		查看</a></span></div></td>
+				</tr>
+			{/volist}
+				
+			</tbody>
+		</table>
+		{$data->render()}
+	</div>
+</div>
+
+<!--包含头部文件-->
+{include file="public/footer" /}
+

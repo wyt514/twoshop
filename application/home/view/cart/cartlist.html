@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0043)http://localhost:8080/mango/cart/list.jhtml -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>购物车</title>
+    <link href="HOME_STATIC/css/common.css" rel="stylesheet" type="text/css">
+    <link href="HOME_STATIC/css/cart.css" rel="stylesheet" type="text/css">
+    <link href="HOME_STATIC/css/float.css" rel="stylesheet" type="text/css"/>
+    <script id="jquery_182" type="text/javascript" class="library" src="HOME_STATIC/js/jquery-3.2.1.min.js"></script>
+    <style>
+        div.container {
+            width: 950px;
+            margin: 0px auto;
+            *zoom: 1;
+        }
+        .header{
+            height:98px;
+        }
+        a{
+            color:black;
+        }
+    </style>
+</head>
+
+<body background="HOME_STATIC/image/year11.jpg"  >
+<!-- 头部 -->
+<div class="container header">
+    <div class="span5">
+        <div class="logo">
+          <!--  跳转到首页链接-->
+            <a href="#">
+                <a href="{:url('home/index/index')}"> <img src="HOME_STATIC/image/dianpulogo.png" width="190px" height="46px"; alt="二号店"/></a>
+            </a>
+        </div>
+    </div>
+
+    <!-- 搜索框	 -->
+    {include file="public/search" /}
+
+    </div>
+
+<!--  包含menu-->
+
+</div>
+
+<div class="container cart" style="background-color:#fff;">
+    {empty name="rs"}
+    <div class="span24" style="background-color:#fff;height:150px;">
+        <div class="step step1">
+            <span><h2 style="color:#F3B67F">暂时没有购物车信息</h2></span>
+        </div>
+    </div>
+    {else /}
+<form id="myform" action="{:url('order/addOrder')}" method="post">
+        <div class="span24">
+            <div class="step step1">
+
+            </div>
+            <table>
+
+                <tbody>
+                {volist name="rs" id="vo" key="k"}
+                <tr>
+                    <th>图片</th>
+                    <th>商品</th>
+                    <th>价格</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                    <th>操作</th>
+                </tr>
+
+                    <tr>
+                        <td width="60">
+                            <!-- <input type="hidden" name="id" value="22"> -->
+
+                            <img src="{$vo['img']}">
+                        </td>
+                        <td>
+                            <a target="_blank">{$vo['goodsname']}</a>
+                        </td>
+                        <td>
+                            ￥{$vo['shopprice']}
+                        </td>
+                        <td class="quantity" width="60">
+                            {$vo['goodsnum']}
+                        </td>
+                        <td width="140">
+
+                            <span class="subtotal">￥{$vo['shopprice']*$vo['goodsnum']}</span>
+                        </td>
+                        <td>
+                           <!-- 删除此项购物车内容-->
+                            <a href="#" onclick="deletecart({$vo.id})" class="delete">删除</a>
+                        </td>
+                    </tr>
+                {/volist}
+                </tbody></table>
+            <dl id="giftItems" class="hidden" style="display: none;">
+            </dl>
+            <div class="total">
+                <em id="promotion"></em>
+
+              <!--  赠送积分: <em id="effectivePoint">596</em>-->
+               <!-- 计算总金额-->
+                <input type="hidden" value="{$sum}" name="totalmoney">
+                商品金额: <strong id="effectivePrice">{$sum}￥元</strong>
+            </div>
+            <div class="bottom">
+                <!--情况购物车，提交订单-->
+               <!-- <a href="#" id="clear" class="clear">清空购物车</a>-->
+                <a href="#" id="submit" onclick="document.getElementById('myform').submit();" class="submit">提交订单</a>
+            </div>
+        </div>
+</form>
+    {/empty}
+
+
+</div>
+
+<div class="container footer">
+    <div class="span24">
+        <div class="footerAd">
+            <img src="HOME_STATIC/image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势">
+        </div>	</div>
+    <div class="span24">
+        <ul class="bottomNav">
+            <li>
+                <a >关于我们</a>
+                |
+            </li>
+            <li>
+                <a>联系我们</a>
+                |
+            </li>
+            <li>
+                <a>招贤纳士</a>
+                |
+            </li>
+            <li>
+                <a>法律声明</a>
+                |
+            </li>
+            <li>
+                <a>友情链接</a>
+                |
+            </li>
+            <li>
+                <a target="_blank">支付方式</a>
+                |
+            </li>
+            <li>
+                <a  target="_blank">配送方式</a>
+                |
+            </li>
+            <li>
+                <a>服务声明</a>
+                |
+            </li>
+            <li>
+                <a>广告声明</a>
+
+            </li>
+        </ul>
+    </div>
+    <div class="span24">
+        <div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
+    </div>
+</div>
+</body>
+<script>
+    function deletecart(id) {
+        var goodsid = id;
+        var data = {'id':goodsid};
+        $.ajax({
+            url:"{:url('cart/deletecartitem')}",
+            type:'post',
+            data:data,
+            success:function (rs) {
+                window.location.reload()
+            },
+            dataType:'json'
+        })
+    }
+
+</script>
+</html>

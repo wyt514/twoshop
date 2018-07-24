@@ -1,0 +1,81 @@
+<div class="span10 last" >
+    <div class="topNav clearfix" >
+
+        <ul>
+            {empty name="$Think.session.vipuser.usernname"}
+            <li id="headerLogin" class="headerLogin" style="display: list-item; ">
+                <a href="{:url('login/login')}">登录</a>|</li>
+
+            <li id="headerRegister" class="headerRegister" style="display: list-item;"><a href="{:url('user/register')}">注册</a>|
+            </li>
+
+            {else /}
+            <span style="color: #ccc; font-size: 18px;position: absolute;right: 490px;top: 3px;">欢迎您，{$Think.session.vipuser.usernname}</span>
+            <li id="headerRegister" class="headerRegister"style="display: list-item;"><a href="{:url('login/logout')}">退出</a>
+            <li id="headerLogin" class="headerLogin" style="display: list-item;">|</li>
+            <li id="headerLogin" class="headerLogin" style="display: list-item;">
+                <a href="{:url('order/showorder')}">我的订单</a>|</li>
+            </li>
+            {/empty}
+
+
+
+            <li><a>会员中心</a> |</li>
+            <li><a>购物指南</a> |</li>
+            <li><a>关于我们</a></li>
+        </ul>
+    </div>
+    <div class="cart" style="width:75px;margin-left: 50px;" >
+        <a href="#">购物车</a>
+    </div>
+    <div class="phone" style="padding: 0px 10px 0px 10px">
+        客服热线: <strong>96008/53277764</strong>
+    </div>
+</div>
+<div class="span24">
+    <ul class="mainNav">
+        <!-- 一级分类，数据库获取 -->
+        <li><a href="#">首页</a></li>
+
+
+
+    </ul>
+</div>
+
+<!--<div class="wrap" id="wrap" style="height: 441px;background-color:#333;position:absolute;z-index:999;filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;" >
+   &lt;!&ndash; 一级&ndash;&gt;
+    <ul>
+        {volist name="cats" id="vo"}
+        <li data-id="a" class="lii">
+				<span>
+					{$vo.catname}
+				</span>
+        </li>
+        {/volist}
+
+    </ul>
+    &lt;!&ndash; 二级菜单 &ndash;&gt;
+    <div id="sub" class="none">
+        &lt;!&ndash; 男装女装 &ndash;&gt;
+        <div id="a" class="sub_content none">
+            <dl>
+         &lt;!&ndash;   二级分类&ndash;&gt;
+                <dt>
+                    <a href="javascript:;">
+
+                        工装女装<i>&gt;</i>
+                    </a>
+                </dt>
+                &lt;!&ndash;三级分类&ndash;&gt;
+                <dd>
+                    <a href="#">
+                        潮流女装
+                    </a>
+                </dd>
+
+            </dl>
+
+        </div>
+    </div>
+</div>-->
+

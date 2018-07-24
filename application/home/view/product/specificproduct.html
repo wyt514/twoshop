@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>2号店</title>
+    <link href="HOME_STATIC/css/common.css" rel="stylesheet" type="text/css">
+    <link href="HOME_STATIC/css/product.css" rel="stylesheet" type="text/css">
+    <link href="HOME_STATIC/css/picture.css" rel="stylesheet" type="text/css">
+    <!-- 放大镜效果css -->
+    <link href="HOME_STATIC/css/magnifier.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="HOME_STATIC/js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function(){
+            $(".add").click(function(){
+                var t=$(this).parent().find('input[class*=text_box]');
+                t.val(parseInt(t.val())+1)
+                setTotal();
+            })
+            $(".min").click(function(){
+                var t=$(this).parent().find('input[class*=text_box]');
+                t.val(parseInt(t.val())-1)
+                if(parseInt(t.val())<0){
+                    t.val(0);
+                }
+                setTotal();
+            })
+            function setTotal(){
+                var s=0;
+                $("#tab td").each(function(){
+                    s+=parseInt($(this).find('input[class*=text_box]').val())*parseFloat($(this).find('span[class*=price]').text());
+                });
+                $("#total").html(s.toFixed(2));
+            }
+            setTotal();
+
+        })
+    </script>
+    <style>
+        div.container {
+            width: 950px;
+            margin: 0px auto;
+            *zoom: 1;
+        }
+        .header{
+            height:98px;
+        }
+
+    </style>
+
+</head>
+<body background="HOME_STATIC/image/year11.jpg"  >
+<script>
+    function saveCart(){
+        document.getElementById("cartForm").submit();
+    }
+
+</script>
+
+<!-- 头部 -->
+<div class="container header">
+    <div class="span5">
+        <div class="logo">
+            <a>
+                <img src="HOME_STATIC/image/dianpulogo.png" width="190px" height="46px"; alt="二号店"/>
+            </a>
+        </div>
+    </div>
+
+    <!-- 搜索框	 -->
+    <div class="span9" style="width:350px; height:50px; line-height:20px;margin-top:13px;text-align:center;">
+
+    </div>
+
+    <!-- 这里可以提取出来 -->
+
+</div>
+
+<!-- 正文 -->
+<div class="container productContent" style="background-color:#fff;">
+    <!-- 导航 -->
+    <div class="span6">
+        <div class="hotProductCategory" >
+            <!--    循环-->
+            <dl>
+                <dt>
+                    <a href="#" /></a>
+                </dt>
+                <!-- 这里循环输出-->
+                <dd>
+                    <a href="#" style="color:#75716c;font-size:13px;"></a>
+                </dd>
+
+            </dl>
+
+        </div>
+    </div>
+
+    <!-- 商品详情 -->
+    <div class="span18 last">
+
+        <div class="box" >
+            <!--图片-->
+            <a href="javascript:;" rel="gallery" target="_blank" class="img-box" style="outline-style: none; text-decoration: none;"  id="zoom">
+
+                <!-- start 放大镜效果 -->
+                <div id="smallBox" class="smallBox">
+                    <img  id="imgBooth" style="opacity: 1;width:300px;height:300px;" title="" class="smallImg medium" src="{$gooddata.goodsimg}" data-bigimg-src="{$gooddata.goodsimg}">
+                    <div class="mask"></div>
+                </div>
+                <div id="bigBox" class="bigBox">
+                    <img  id="imgBooth" style="opacity: 1;width:300px;height:300px;" title="" class="bigImg medium" src="{$gooddata.goodsimg}" data-bigimg-src="{$gooddata.goodsimg}">
+                </div>
+                <!-- end 放大镜效果 -->
+
+
+                <div style="display: block; top: 0px; left: 162px; width: 0px; height: 0px; position: absolute; border-width: 1px;" class="zoomPup"></div><div style="position: absolute; z-index: 5001; left: 312px; top: 0px; display: block;" class="zoomWindow"><div style="width: 368px;" class="zoomWrapper"><div style="width: 100%; position: absolute; display: none;" class="zoomWrapperTitle"></div><div style="width: 0%; height: 0px;" class="zoomWrapperImage"><img src="" style="position: absolute; border: 0px none; display: block; left: -432px; top: 0px;"></div></div></div><div style="visibility: hidden; top: 129.5px; left: 106px; position: absolute;" class="zoomPreload">Loading zoom</div></div>
+        </a>
+    </div>
+
+
+
+
+    <div class="img-pop"><img src="{$gooddata.goodsimg}"></div>
+    <div style="position:absolute;width:935px;">
+        <div class="name" style="line-height: 130px;font-size: 30px;font-family:微软雅黑;"></div>
+        <div class="sn">
+            <div>编号:{$gooddata.goodsid}</div>
+        </div>
+        <div class="info">
+            <dl>
+                <dt>门店价:</dt>
+                <dd>
+                    <strong>￥：{$gooddata.shopprice}元</strong>
+                    市场 价：
+                    <del>￥:{$gooddata.marketprice}元</del>
+                </dd>
+            </dl>
+            <dl>
+                <dt>促销:</dt>
+                <dd>
+                    {empty name="$gooddata.goodstips"}
+                    <span>无促销信息</span>
+                    {else /}
+                    <a target="_blank" title="限时抢购 (2014-07-30 ~ 2015-01-01)">{$gooddata.goodstips}</a>
+                    {/empty}
+
+                </dd>
+            </dl>
+            <dl>
+                <dt>    </dt>
+                <dd>
+                    <span>    </span>
+                </dd>
+            </dl>
+        </div>
+        <div id="tab">
+            <form id="cartForm" action="{:url('cart/addgoods')}" method="post">
+                <input type="hidden" name="pid" value=""/>
+                <div class="action">
+                    <input type="hidden" name="goodsid" id="goodsid" value="{$gooddata.goodsid}">
+                    <input type="hidden" name="userid" id="userid" value="{$Think.session.vipuser.userid}">
+                    <dl class="quantity">
+                        <dt>购买数量:</dt>
+                        <dd>
+                            <input class="min" name="" type="button" value="-" />
+                            <input class="text_box" id="quantity" name="goodsnum" value="1" maxlength="4" onpaste="return false;" type="text">
+                            <input class="add" name="" type="button" value="+" />
+
+                        </dd>
+                        <dd>
+                            件
+                        </dd>
+                    </dl>
+                    <div class="buy">
+                        <input id="addCart" class="addCart" style="color: black" value="加入购物车" type="button" onclick="saveCart()">
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- 商品介绍 -->
+        <div style="position:absolute; margin-top: 420px; margin-left: 200px;">
+            <!--<div id="bar" class="bar">
+                <ul>
+                    <li id="introductionTab" >
+                        <a href="#introduction" style="color:#000;">商品介绍</a>
+                    </li>
+
+                </ul>
+            </div>-->
+
+            <div id="introduction" name="introduction" class="introduction">
+                <div class="title">
+                    <strong>商品介绍</strong>
+                </div>
+                <div>
+                   <!-- <img src="#" style="width:200px;height:200px;" alt="商品介绍">-->
+                    {$gooddata.goodsdesc}
+                </div>
+            </div>
+
+
+
+        </div>
+        <div>
+        </div>
+
+        <script id="jquery_182" type="text/javascript" class="library" src="HOME_STATIC/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="HOME_STATIC/js/picture.js"></script>
+        <!-- 放大镜效果js -->
+        <script type="text/javascript" src="HOME_STATIC/js/magnifier.js"></script>
+</body>
+</html>

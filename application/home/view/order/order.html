@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0043)http://localhost:8080/mango/cart/list.jhtml -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <title>订单页面</title>
+    <link href="HOME_STATIC/css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="HOME_STATIC/css/cart.css" rel="stylesheet" type="text/css"/>
+    <style>
+        div.container {
+            width: 950px;
+            margin: 0px auto;
+            *zoom: 1;
+        }
+        .header{
+            height:98px;
+        }
+        .span24{
+            background:white;
+        }
+        a{
+            color:black;
+        }
+    </style>
+</head>
+<body background="HOME_STATIC/image/year11.jpg"  >
+
+<div class="container header">
+    <div class="span5">
+        <div class="logo">
+            <!--跳转首页-->
+            <a href="#">
+                <a href="{:url('home/index/index')}"> <img src="HOME_STATIC/image/dianpulogo.png" width="190px" height="46px"; alt="二号店"/></a>
+            </a>
+        </div>
+    </div>
+
+    <!-- 搜索框	 -->
+    <div class="span9" style="width:350px; height:50px; line-height:20px;margin-top:13px;text-align:center;">
+
+    </div>
+
+
+
+</div>
+
+<div class="container cart">
+    <form id="orderForm" action="{:url('order/insertorderdata')}" method="post">
+    <div class="span24">
+
+        <div class="step step1">
+            <ul>
+
+                <li  class="current"></li>
+                <li  >生成订单成功</li>
+            </ul>
+        </div>
+
+
+        <table>
+
+            <tbody>
+            <tr>
+                <th colspan="6">订单编号:{$ordernum}</th>
+            </tr>
+            {volist name="rs" id="vo" key="k"}
+            <tr>
+                <th>图片</th>
+                <th>商品</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>小计</th>
+
+            </tr>
+            <input type="hidden" name="goodsid[{$k}]" value="{$vo.goodsid}">
+            <tr>
+                <td width="60">
+                    <!-- <input type="hidden" name="id" value="22"> -->
+
+                    <img src="{$vo['img']}">
+                </td>
+                <td>
+                    <a target="_blank">{$vo['goodsname']}</a>
+                </td>
+                <td>
+                    ￥{$vo['shopprice']}
+                </td>
+                <td class="quantity" width="60">
+                    {$vo['goodsnum']}
+                </td>
+                <td width="140">
+
+                    <span class="subtotal">￥{$vo['shopprice']*$vo['goodsnum']}</span>
+                </td>
+
+            </tr>
+            {/volist}
+    </tbody>
+    </table>
+    <dl id="giftItems" class="hidden" style="display: none;">
+    </dl>
+    <div class="total">
+        <em id="promotion"></em>
+        商品金额: <strong id="effectivePrice">￥{$totalmoney}元</strong>
+    </div>
+
+        <input type="hidden" name="ordernum" value="{$ordernum}"/>
+        <div class="span24">
+            <p>
+                <input type="hidden" name="totalmoney" value="{$totalmoney}">
+                收货地址：<input name="useraddress" type="text" value="" style="width:350px" />
+                <br />
+                收货人&nbsp;&nbsp;&nbsp;：<input name="username" type="text" value="" style="width:150px" />
+                <br />
+                联系方式：<input name="userphone" type="text"value="" style="width:150px" />
+
+            </p>
+            <hr />
+            <p>
+                选择银行：<br/>
+                <input type="radio" name="pd_FrpId" value="ICBC-NET-B2C" checked="checked"/>工商银行
+                <img src="HOME_STATIC/image/icbc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="pd_FrpId" value="BOC-NET-B2C"/>中国银行
+                <img src="HOME_STATIC/image/bc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="pd_FrpId" value="ABC-NET-B2C"/>农业银行
+                <img src="HOME_STATIC/image/abc.bmp" align="middle"/>
+                <br/>
+                <input type="radio" name="pd_FrpId" value="BOCO-NET-B2C"/>交通银行
+                <img src="HOME_STATIC/image/bcc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="pd_FrpId" value="PINGANBANK-NET"/>平安银行
+                <img src="HOME_STATIC/image/pingan.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="pd_FrpId" value="CCB-NET-B2C"/>建设银行
+                <img src="HOME_STATIC/image/ccb.bmp" align="middle"/>
+                <br/>
+                <input type="radio" name="pd_FrpId" value="CEB-NET-B2C"/>光大银行
+                <img src="HOME_STATIC/image/guangda.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="pd_FrpId" value="CMBCHINA-NET-B2C"/>招商银行
+                <img src="HOME_STATIC/image/cmb.bmp" align="middle"/>
+            </p>
+            <hr />
+            <p style="text-align:right">
+                <a href="javascript:document.getElementById('orderForm').submit();">
+                    <img src="HOME_STATIC/image/finalbutton.gif" width="204" height="51" border="0" />
+                </a>
+            </p>
+        </div>
+    </form>
+</div>
+
+</div>
+<div class="container footer">
+    <div class="span24">
+        <div class="footerAd">
+            <img src="HOME_STATIC/image//footer.jpg" alt="我们的优势" title="我们的优势" height="52" width="950">
+        </div>
+    </div>
+    <div class="span24">
+        <ul class="bottomNav">
+            <li>
+                <a href="#">关于我们</a>
+                |
+            </li>
+            <li>
+                <a href="#">联系我们</a>
+                |
+            </li>
+            <li>
+                <a href="#">诚聘英才</a>
+                |
+            </li>
+            <li>
+                <a href="#">法律声明</a>
+                |
+            </li>
+            <li>
+                <a>友情链接</a>
+                |
+            </li>
+            <li>
+                <a target="_blank">支付方式</a>
+                |
+            </li>
+            <li>
+                <a target="_blank">配送方式</a>
+                |
+            </li>
+            <li>
+                <a >SHOP++官网</a>
+                |
+            </li>
+            <li>
+                <a>SHOP++论坛</a>
+
+            </li>
+        </ul>
+    </div>
+    <div class="span24">
+        <div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
+    </div>
+</div>
+</body>
+</html>

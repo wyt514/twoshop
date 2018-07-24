@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0043)http://localhost:8080/mango/cart/list.jhtml -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>订单页面</title>
+    <link href="HOME_STATIC/css/common.css"
+          rel="stylesheet" type="text/css" />
+    <link href="HOME_STATIC/css/cart.css"
+          rel="stylesheet" type="text/css" />
+    <link href="HOME_STATIC/css/product.css"
+          rel="stylesheet" type="text/css" />
+    <style>
+        div.container {
+            width: 950px;
+            margin: 0px auto;
+            *zoom: 1;
+        }
+        .header{
+            height:98px;
+        }
+        a{
+            color:balck;
+        }
+        div.cart table td{
+            background:white;
+        }
+    </style>
+</head>
+<body background="HOME_STATIC/image/year11.jpg"  >
+
+<div class="container header">
+    <div class="span5">
+        <div class="logo">
+            <a href="./网上商城/index.htm">
+                <a href="{:url('home/index/index')}"><img src="HOME_STATIC/image/dianpulogo.png" width="190px" height="46px"; alt="二号店"/></a>
+            </a>
+        </div>
+    </div>
+    <div class="span9">
+        <div class="headerAd">
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="container cart">
+
+    <div class="span24">
+
+        <div class="step step1">
+            <ul>
+
+                <li class="current"></li>
+                <li style="color: black;font-weight: bolder;font-size: 18px">我的订单</li>
+            </ul>
+        </div>
+
+
+        <table>
+            <tbody>
+           {volist name="orderlist" id="vo"}
+                <tr>
+                   <!-- 订单状态：-3用户拒收，-2未付款订单，-1用户取消，0代发货，1配送中，2用户确认收货-->
+                    <th colspan="5">订单编号:{$vo.ordernum}&nbsp;&nbsp;&nbsp;&nbsp;订单金额:<font
+                            color="red">{$vo.totalmoney}</font>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<font color="red"></font>
+                            {switch name="$vo.orderstatus"}
+                            {case value="-2"}<a style="color:black" href="#">付款</a>{/case}
+                            {case value="0"}<a style="color:black" href="#">待发货</a>{/case}
+                            {case value="1"}<a style="color:black" href="{:url('order/comfirmorder')}">确认收货</a>
+                            <a style="color:black" href="{:url('wuliu/index')}">查看物流</a>{/case}
+                            {case value="2"}
+                                <a style="color:black" href="#">交易成功</a>
+                                    {empty name="$vo.isappraises"}
+                                       <a style="color:black" href="{:url('product/pingjia',['ordernum'=>$vo.ordernum])}">写评价</a>
+
+                                     {/empty}
+                            {/case}
+                            {default /}无
+                            {/switch}
+
+                            <!--付款方法-->
+                               <!-- <a style="color:black" href="#">付款</a>
+
+                            <s:if test="#order.state == 2">
+                                已付款
+                            </s:if>
+                            <s:if test="#order.state == 3">
+                                <a style="color:black" href="${ pageContext.request.contextPath }/order_updateState.action?oid=<s:property value="#order.oid" />">确认收货</a>
+                                <a style="color:black" href="${ pageContext.request.contextPath }/order_showWuLiu.action?oid=<s:property value="#order.oid" />">查看物流</a>
+                            </s:if>
+                            <s:if test="#order.state == 4">
+                                交易成功
+                            </s:if>-->
+
+                    </th>
+                </tr>
+           {/volist}
+           {volist name="rs" id="vo1" key="k"}
+           <tr>
+               <th width="150px">图片</th>
+               <th>商品</th>
+               <th>价格</th>
+               <th>数量</th>
+               <th>小计</th>
+
+           </tr>
+
+           <tr>
+               <td width="60">
+                   <!-- <input type="hidden" name="id" value="22"> -->
+
+                   <img src="{$vo1['img']}">
+               </td>
+               <td>
+                   <span>{$vo1.goodsname}</span>
+               </td>
+               <td>
+                   ￥{$vo1['shopprice']}
+               </td>
+               <td class="quantity" width="60">
+                   {$vo1['goodsnum']}
+               </td>
+               <td width="140">
+
+                   <span class="subtotal">￥{$vo1['shopprice']*$vo1['goodsnum']}</span>
+               </td>
+
+           </tr>
+           {/volist}
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>
+<div class="container footer">
+    <div class="span24">
+        <div class="footerAd">
+            <img src="HOME_STATIC/imagefooter.jpg" alt="我们的优势"
+                 title="我们的优势" height="52" width="950">
+        </div>
+    </div>
+    <div class="span24">
+        <ul class="bottomNav">
+            <li><a href="#">关于我们</a> |</li>
+            <li><a href="#">联系我们</a> |</li>
+            <li><a href="#">诚聘英才</a> |</li>
+            <li><a href="#">法律声明</a> |</li>
+            <li><a>友情链接</a> |</li>
+            <li><a target="_blank">支付方式</a> |</li>
+            <li><a target="_blank">配送方式</a> |</li>
+            <li><a>2号店官网</a> |</li>
+            <li><a>2号店论坛</a></li>
+        </ul>
+    </div>
+    <div class="span24">
+        <div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>二号店</title>
+    <link href="HOME_STATIC/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="HOME_STATIC/css/slider.css" rel="stylesheet" type="text/css"/>
+    <link href="HOME_STATIC/css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="HOME_STATIC/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="HOME_STATIC/css/logistics.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+
+        a{
+            color:black;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container header" style="width:980px">
+    <div class="span5">
+        <div class="logo">
+            <a href="./网上商城/index.htm">
+                <img src="HOME_STATIC/image/dianpulogo.png" alt="二号店"/>
+            </a>
+        </div>
+    </div>
+    <div class="span9">
+
+        <!-- 搜索框	 -->
+        <div style="height:30px; line-height:20px;margin-top:20px;text-align:center;">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 物流 -->
+<div class="spana1">
+    <div class="container" style="text-align: left;">
+        <button type="button" class="btn btn-default">物流信息</button>
+    </div>
+    <hr/>
+
+
+
+
+    <!-- 面包屑导航 -->
+    <div class="spana2">
+        <ol class="breadcrumb"  style="margin-bottom:0px; background-color: #fff">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">我的购物车</a></li>
+            <li class="active">物流信息</li>
+        </ol>
+    </div>
+
+    <div class="spana3">
+        <table>
+            <th>包裹信息</th>
+            <tr>
+                <td class="td1">
+                    <img src="HOME_STATIC/image/01.jpg" alt="物流信息" title="物流信息" style="width:860px;margin:0px auto;height: 350px;">
+                </td>
+            </tr>
+
+            <!-- 物流信息 -->
+            <tr>
+                <td class="td2" width="500px">
+                    <table width="470px">
+
+                       <!-- <s:iterator value="wList" id="kd">
+                            <tr  width="460px">
+
+                                <td width="450px" height="20px"><s:property value="kd" /></td>
+                        </s:iterator>-->
+                        {volist name="list" id="vo"}
+                        <tr width="460px">
+                            <td width="450px" height="20px">{$vo.datetime}</td>
+                            <td width="450px" height="20px">{$vo.remark}</td>
+                            <td width="450px" height="20px">{$vo.zone}</td>
+                        {/volist}
+                        </tr>
+
+
+                    </table>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>
+
+
+
+
+</div>
+
+<!-- 尾部 -->
+<div class="container footer">
+    <div class="span24">
+        <div class="footerAd">
+            <img src="HOME_STATIC/image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势">
+        </div>
+    </div>
+    <div class="span24">
+        <ul class="bottomNav">
+            <li>
+                <a>关于我们</a>
+                |
+            </li>
+            <li>
+                <a>联系我们</a>
+                |
+            </li>
+            <li>
+                <a>招贤纳士</a>
+                |
+            </li>
+            <li>
+                <a>法律声明</a>
+                |
+            </li>
+            <li>
+                <a>友情链接</a>
+                |
+            </li>
+            <li>
+                <a target="_blank">支付方式</a>
+                |
+            </li>
+            <li>
+                <a target="_blank">配送方式</a>
+                |
+            </li>
+            <li>
+                <a>服务声明</a>
+                |
+            </li>
+            <li>
+                <a>广告声明</a>
+
+            </li>
+        </ul>
+    </div>
+    <div class="span24">
+        <div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="HOME_STATIC/js/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="HOME_STATIC/js/bootstrap.min.js"></script>
+</body>
+</html>
